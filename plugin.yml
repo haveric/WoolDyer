@@ -1,7 +1,6 @@
 name: WoolDyer
 main: haveric.woolDyer.WoolDyer
 version: 1.0
-depend: [Vault]
 description: >
              Dye wool that is already placed
 commands:
