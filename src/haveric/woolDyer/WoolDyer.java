@@ -13,6 +13,8 @@ public class WoolDyer extends JavaPlugin{
     final Logger log = Logger.getLogger("Minecraft");
     private final WDPlayerInteract playerInteract = new WDPlayerInteract(this);
 
+    private Commands commands = new Commands(this);
+    
     // Config variables
     public FileConfiguration config;
     public File configFile;
@@ -32,6 +34,8 @@ public class WoolDyer extends JavaPlugin{
         } else {
         	config = YamlConfiguration.loadConfiguration(configFile);
         }
+        
+        getCommand(Commands.getMain()).setExecutor(commands);
         
 		log.info(String.format("[%s] v%s Started",getDescription().getName(), getDescription().getVersion()));
 	}
