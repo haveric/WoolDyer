@@ -1,5 +1,7 @@
 package haveric.woolDyer;
 
+import net.milkbowl.vault.permission.Permission;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,93 +48,96 @@ public class WDPlayerInteract implements Listener{
         
         ItemStack holding = player.getItemInHand();
 		 if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.WOOL && holding.getType() == Material.INK_SACK){
-			 Block block = event.getClickedBlock();
-			 int wool = block.getData();
-			 int dye = 15 - holding.getDurability();
-
-			 int newData = wool;
-			 if (plugin.canReplaceAll()){
-				 newData = dye;
-			 } else {
-				 if (wool == WHITE && dye != WHITE){
+			 Permission perm = plugin.getPerm();
+		 	 if (perm == null || perm.has(player,  "wooldyer.dye")) {
+				 Block block = event.getClickedBlock();
+				 int wool = block.getData();
+				 int dye = 15 - holding.getDurability();
+	
+				 int newData = wool;
+				 if (plugin.canReplaceAll()){
 					 newData = dye;
-				 } else if (wool == ORANGE) {
-					 if (dye == WHITE){
-						 newData = YELLOW;
+				 } else {
+					 if (wool == WHITE && dye != WHITE){
+						 newData = dye;
+					 } else if (wool == ORANGE) {
+						 if (dye == WHITE){
+							 newData = YELLOW;
+						 }
+					 } else if (wool == MAGENTA) {
+						 if (dye == WHITE){
+							 newData = PINK;
+						 }
+					 } else if (wool == LIGHT_BLUE) {
+	
+					 } else if (wool == YELLOW) {
+						 if (dye == RED){ 
+							 newData = ORANGE;
+						 }
+					 } else if (wool == LIGHT_GREEN) {
+	
+					 } else if (wool == PINK) {
+						 if (dye == PURPLE){
+							 newData = MAGENTA;
+						 }
+					 } else if (wool == GRAY) {
+						 if (dye == WHITE || dye == LIGHT_GRAY){
+							 newData = LIGHT_GRAY; 
+						 } else if (dye == BLACK){
+							 newData = BLACK;
+						 }
+					 } else if (wool == LIGHT_GRAY) { 
+						 if (dye == WHITE){
+							 newData = WHITE; 
+						 } else if (dye == BLACK){
+							 newData = GRAY;
+						 }
+					 } else if (wool == CYAN) { 
+						 
+					 } else if (wool == PURPLE) {
+						 if (dye == PINK || dye == WHITE){
+							 newData = MAGENTA; 
+						 }
+					 } else if (wool == BLUE) {
+						 if (dye == WHITE){
+							 newData = LIGHT_BLUE;
+						 } else if (dye == GREEN){
+							 newData = CYAN; 
+						 }
+					 } else if (wool == BROWN) {
+						 
+					 } else if (wool == GREEN) {
+						 if (dye == WHITE){
+							 newData = LIGHT_GREEN;
+						 }
+					 } else if (wool == RED) {
+						 if (dye == YELLOW || dye == WHITE){
+							 newData = ORANGE;
+						 } else if (dye == BLUE){
+							 newData = PURPLE;
+						 } else if (dye == WHITE){
+							 newData = PINK;
+						 }
+					 } else if (wool == BLACK) {
+						 if (dye == WHITE || dye == GRAY || dye == LIGHT_GRAY){
+							 newData = GRAY;
+						 }
 					 }
-				 } else if (wool == MAGENTA) {
-					 if (dye == WHITE){
-						 newData = PINK;
-					 }
-				 } else if (wool == LIGHT_BLUE) {
-
-				 } else if (wool == YELLOW) {
-					 if (dye == RED){ 
-						 newData = ORANGE;
-					 }
-				 } else if (wool == LIGHT_GREEN) {
-
-				 } else if (wool == PINK) {
-					 if (dye == PURPLE){
-						 newData = MAGENTA;
-					 }
-				 } else if (wool == GRAY) {
-					 if (dye == WHITE || dye == LIGHT_GRAY){
-						 newData = LIGHT_GRAY; 
-					 } else if (dye == BLACK){
-						 newData = BLACK;
-					 }
-				 } else if (wool == LIGHT_GRAY) { 
-					 if (dye == WHITE){
-						 newData = WHITE; 
-					 } else if (dye == BLACK){
-						 newData = GRAY;
-					 }
-				 } else if (wool == CYAN) { 
 					 
-				 } else if (wool == PURPLE) {
-					 if (dye == PINK || dye == WHITE){
-						 newData = MAGENTA; 
+				 }		
+				 if (wool != newData){
+					 if (player.getGameMode() == GameMode.SURVIVAL){
+						 int amt = holding.getAmount();
+		                 if (amt > 1){
+		                     holding.setAmount(--amt);
+		                 } else {
+		                	 inventory.setItemInHand(null);
+		                 }
 					 }
-				 } else if (wool == BLUE) {
-					 if (dye == WHITE){
-						 newData = LIGHT_BLUE;
-					 } else if (dye == GREEN){
-						 newData = CYAN; 
-					 }
-				 } else if (wool == BROWN) {
-					 
-				 } else if (wool == GREEN) {
-					 if (dye == WHITE){
-						 newData = LIGHT_GREEN;
-					 }
-				 } else if (wool == RED) {
-					 if (dye == YELLOW || dye == WHITE){
-						 newData = ORANGE;
-					 } else if (dye == BLUE){
-						 newData = PURPLE;
-					 } else if (dye == WHITE){
-						 newData = PINK;
-					 }
-				 } else if (wool == BLACK) {
-					 if (dye == WHITE || dye == GRAY || dye == LIGHT_GRAY){
-						 newData = GRAY;
-					 }
+	                 
+	            	 block.setData((byte)newData);
 				 }
-				 
-			 }		
-			 if (wool != newData){
-				 if (player.getGameMode() == GameMode.SURVIVAL){
-					 int amt = holding.getAmount();
-	                 if (amt > 1){
-	                     holding.setAmount(--amt);
-	                 } else {
-	                	 inventory.setItemInHand(null);
-	                 }
-				 }
-                 
-            	 block.setData((byte)newData);
-			 }
+		 	 }
 		 }
 	}
 }

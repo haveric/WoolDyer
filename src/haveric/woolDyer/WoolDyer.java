@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.permission.Permission;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WoolDyer extends JavaPlugin{
@@ -21,6 +24,9 @@ public class WoolDyer extends JavaPlugin{
     
     final boolean REPLACE_ALL_DEFAULT = true; 
 	
+    // Vault
+    private Permission perm;
+    
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
@@ -37,6 +43,9 @@ public class WoolDyer extends JavaPlugin{
         
         getCommand(Commands.getMain()).setExecutor(commands);
         
+        // Vault
+ 		setupVault();
+     		
 		log.info(String.format("[%s] v%s Started",getDescription().getName(), getDescription().getVersion()));
 	}
 
@@ -58,4 +67,19 @@ public class WoolDyer extends JavaPlugin{
 	public boolean canReplaceAll(){
 		return config.getBoolean("replaceAll");
 	}
+	
+	private void setupVault() {
+		if(getServer().getPluginManager().getPlugin("Vault") == null){
+    		log.info(String.format("[%s] Vault not found. Permissions disabled.",getDescription().getName()));
+    		return;
+    	}
+        RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+        if (permProvider != null) {
+            perm = permProvider.getProvider();
+        }
+    }
+	
+	public Permission getPerm(){
+    	return perm;
+    }
 }
