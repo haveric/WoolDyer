@@ -44,14 +44,13 @@ public class WoolDyer extends JavaPlugin{
         getCommand(Commands.getMain()).setExecutor(commands);
         
         // Vault
- 		setupVault();
-     		
-		log.info(String.format("[%s] v%s Started",getDescription().getName(), getDescription().getVersion()));
+        setupVault();	
+
 	}
 
 	@Override
 	public void onDisable() {
-		log.info(String.format("[%s] Disabled",getDescription().getName()));
+
 	}
 
 	private void setupConfig(){
