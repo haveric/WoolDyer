@@ -13,7 +13,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WoolDyer extends JavaPlugin {
-    final Logger log = Logger.getLogger("Minecraft");
+    static Logger log;
     private final WDPlayerInteract playerInteract = new WDPlayerInteract(this);
 
     private Commands commands = new Commands(this);
@@ -29,6 +29,7 @@ public class WoolDyer extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        log = getLogger();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerInteract, this);
 
@@ -69,7 +70,7 @@ public class WoolDyer extends JavaPlugin {
 
     private void setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            log.info(String.format("[%s] Vault not found. Permissions disabled.", getDescription().getName()));
+            log.info("Vault not found. Permissions disabled.");
             return;
         }
         RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
