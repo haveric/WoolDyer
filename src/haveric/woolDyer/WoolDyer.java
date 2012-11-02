@@ -1,19 +1,19 @@
 package haveric.woolDyer;
 
+import haveric.woolDyer.mcstats.Metrics;
+import haveric.woolDyer.mcstats.Metrics.Graph;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WoolDyer extends JavaPlugin {
-    static Logger log;
+    private static Logger log;
     private final WDPlayerInteract playerInteract = new WDPlayerInteract(this);
 
     private Commands commands = new Commands(this);
@@ -24,8 +24,7 @@ public class WoolDyer extends JavaPlugin {
 
     private final static boolean REPLACE_ALL_DEFAULT = true;
 
-    // Vault
-    private Permission perm;
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
@@ -44,9 +43,7 @@ public class WoolDyer extends JavaPlugin {
 
         getCommand(Commands.getMain()).setExecutor(commands);
 
-        // Vault
-        setupVault();
-
+        setupMetrics();
     }
 
     @Override
@@ -68,18 +65,25 @@ public class WoolDyer extends JavaPlugin {
         return config.getBoolean("replaceAll");
     }
 
-    private void setupVault() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            log.info("Vault not found. Permissions disabled.");
-            return;
-        }
-        RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-        if (permProvider != null) {
-            perm = permProvider.getProvider();
-        }
-    }
+    private void setupMetrics() {
+        try {
+            metrics = new Metrics(this);
 
-    public Permission getPerm() {
-        return perm;
+            // Custom data
+            Graph javaGraph = metrics.createGraph("Java Version");
+            String javaVersion = System.getProperty("java.version");
+            javaGraph.addPlotter(new Metrics.Plotter(javaVersion) {
+                @Override
+                public int getValue() {
+                    return 1;
+                }
+            });
+            metrics.addGraph(javaGraph);
+            // End Custom data
+
+            metrics.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

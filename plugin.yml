@@ -3,10 +3,19 @@ main: haveric.woolDyer.WoolDyer
 version: 1.0.2
 author: haveric
 dev-url: http://dev.bukkit.org/server-mods/wooldyer/
-softdepend: [Vault]
 description: >
              Dye wool that is already placed
 commands:
-  wooldyer:
-    description: Dye wool that is already placed
-    usage:
+    wooldyer:
+        description: Dye wool that is already placed
+        usage:
+permissions:
+    wooldyer.*:
+        description: Gives access to all WoolDyer commands
+        children:
+            wooldyer.dye: true
+    wooldyer.dye:
+        description: Allows user to dye wool
+        default: false
+        
+    

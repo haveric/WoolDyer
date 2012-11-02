@@ -1,7 +1,5 @@
 package haveric.woolDyer;
 
-import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,8 +44,8 @@ public class WDPlayerInteract implements Listener {
 
         ItemStack holding = player.getItemInHand();
          if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.WOOL && holding.getType() == Material.INK_SACK) {
-             Permission perm = plugin.getPerm();
-              if (perm == null || perm.has(player,  "wooldyer.dye")) {
+             
+              if (Perms.canDye(player)) {
                  Block block = event.getClickedBlock();
                  int wool = block.getData();
                  int dye = 15 - holding.getDurability();
