@@ -31,7 +31,7 @@ public class Commands implements CommandExecutor {
         return false;
     }
 
-    public static String getMain() {
+    public String getMain() {
         return cmdMain;
     }
 }

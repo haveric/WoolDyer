@@ -8,6 +8,7 @@ Version ???
 * Removed enable/disable messages
 * Removed optional dependency on Vault. Any permission system will work.
 * Added Metrics
+* Added WorldGuard support
 
 Version 1.0.2 (3/14/2012)
 * Added Permissions through Vault. Give a user/group "- wooldyer.dye" to allow them to dye wool

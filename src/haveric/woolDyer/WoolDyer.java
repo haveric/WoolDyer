@@ -1,7 +1,6 @@
 package haveric.woolDyer;
 
 import haveric.woolDyer.mcstats.Metrics;
-import haveric.woolDyer.mcstats.Metrics.Graph;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,12 +8,14 @@ import java.util.logging.Logger;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
 public class WoolDyer extends JavaPlugin {
     private static Logger log;
-    private final WDPlayerInteract playerInteract = new WDPlayerInteract(this);
 
     private Commands commands = new Commands(this);
 
@@ -29,8 +30,9 @@ public class WoolDyer extends JavaPlugin {
     @Override
     public void onEnable() {
         log = getLogger();
+
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(playerInteract, this);
+        pm.registerEvents(new WDPlayerInteract(this), this);
 
         // create a new config file
         configFile = new File(getDataFolder() + "/config.yml");
@@ -41,7 +43,10 @@ public class WoolDyer extends JavaPlugin {
             config = YamlConfiguration.loadConfiguration(configFile);
         }
 
-        getCommand(Commands.getMain()).setExecutor(commands);
+        // WorldGuard
+        setupWorldGuard(pm);
+
+        getCommand(commands.getMain()).setExecutor(commands);
 
         setupMetrics();
     }
@@ -49,6 +54,15 @@ public class WoolDyer extends JavaPlugin {
     @Override
     public void onDisable() {
 
+    }
+
+    private void setupWorldGuard(PluginManager pm) {
+        Plugin worldGuard = pm.getPlugin("WorldGuard");
+        if (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) {
+            log.info(String.format("[%s] WorldGuard not found.", getDescription().getName()));
+        } else {
+            Guard.setWorldGuard((WorldGuardPlugin) worldGuard);
+        }
     }
 
     private void setupConfig() {
@@ -68,18 +82,6 @@ public class WoolDyer extends JavaPlugin {
     private void setupMetrics() {
         try {
             metrics = new Metrics(this);
-
-            // Custom data
-            Graph javaGraph = metrics.createGraph("Java Version");
-            String javaVersion = System.getProperty("java.version");
-            javaGraph.addPlotter(new Metrics.Plotter(javaVersion) {
-                @Override
-                public int getValue() {
-                    return 1;
-                }
-            });
-            metrics.addGraph(javaGraph);
-            // End Custom data
 
             metrics.start();
         } catch (IOException e) {
