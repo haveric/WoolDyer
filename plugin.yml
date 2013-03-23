@@ -1,6 +1,6 @@
 name: WoolDyer
 main: haveric.woolDyer.WoolDyer
-version: 1.0.2
+version: 1.0.3
 author: haveric
 dev-url: http://dev.bukkit.org/server-mods/wooldyer/
 softdepend: [WorldGuard]

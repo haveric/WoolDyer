@@ -4,11 +4,12 @@ Allows you to dye wool that is placed on the ground by right clicking on it with
 
 Changelog:
 
-Version ???
+Version 1.0.3 (3/22/2013)
 * Removed enable/disable messages
 * Removed optional dependency on Vault. Any permission system will work.
 * Added Metrics
 * Added WorldGuard support
+* Removed extra wool checks.
 
 Version 1.0.2 (3/14/2012)
 * Added Permissions through Vault. Give a user/group "- wooldyer.dye" to allow them to dye wool

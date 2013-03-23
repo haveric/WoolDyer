@@ -66,13 +66,13 @@ public class WDPlayerInteract implements Listener {
                              if (dye == WHITE) {
                                  newData = PINK;
                              }
-                         } else if (wool == LIGHT_BLUE) {
+                         //} else if (wool == LIGHT_BLUE) {
 
                          } else if (wool == YELLOW) {
                              if (dye == RED) {
                                  newData = ORANGE;
                              }
-                         } else if (wool == LIGHT_GREEN) {
+                         //} else if (wool == LIGHT_GREEN) {
 
                          } else if (wool == PINK) {
                              if (dye == PURPLE) {
@@ -90,7 +90,7 @@ public class WDPlayerInteract implements Listener {
                              } else if (dye == BLACK) {
                                  newData = GRAY;
                              }
-                         } else if (wool == CYAN) {
+                         //} else if (wool == CYAN) {
 
                          } else if (wool == PURPLE) {
                              if (dye == PINK || dye == WHITE) {
@@ -102,7 +102,7 @@ public class WDPlayerInteract implements Listener {
                              } else if (dye == GREEN) {
                                  newData = CYAN;
                              }
-                         } else if (wool == BROWN) {
+                         //} else if (wool == BROWN) {
 
                          } else if (wool == GREEN) {
                              if (dye == WHITE) {
