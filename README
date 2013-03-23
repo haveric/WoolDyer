@@ -4,6 +4,9 @@ Allows you to dye wool that is placed on the ground by right clicking on it with
 
 Changelog:
 
+Coming soon:
+* Updated Metrics version
+
 Version 1.0.3 (3/22/2013)
 * Removed enable/disable messages
 * Removed optional dependency on Vault. Any permission system will work.
