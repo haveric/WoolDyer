@@ -28,7 +28,7 @@ public class WDPlayerInteract implements Listener {
     private static final int CYAN = 9;
     private static final int PURPLE = 10;
     private static final int BLUE = 11;
-    private static final int BROWN = 12;
+    //private static final int BROWN = 12;
     private static final int GREEN = 13;
     private static final int RED = 14;
     private static final int BLACK = 15;
