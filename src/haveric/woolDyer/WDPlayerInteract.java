@@ -1,5 +1,7 @@
 package haveric.woolDyer;
 
+import haveric.woolDyer.guard.Guard;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

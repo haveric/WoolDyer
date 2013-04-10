@@ -1,5 +1,6 @@
 package haveric.woolDyer;
 
+import haveric.woolDyer.guard.Guard;
 import haveric.woolDyer.mcstats.Metrics;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.palmergames.bukkit.towny.Towny;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class WoolDyer extends JavaPlugin {
@@ -45,6 +47,8 @@ public class WoolDyer extends JavaPlugin {
 
         // WorldGuard
         setupWorldGuard(pm);
+        // Towny
+        setupTowny(pm);
 
         getCommand(commands.getMain()).setExecutor(commands);
 
@@ -62,6 +66,15 @@ public class WoolDyer extends JavaPlugin {
             log.info(String.format("[%s] WorldGuard not found.", getDescription().getName()));
         } else {
             Guard.setWorldGuard((WorldGuardPlugin) worldGuard);
+        }
+    }
+
+    private void setupTowny(PluginManager pm) {
+        Plugin towny = pm.getPlugin("Towny");
+        if (towny ==  null || !(towny instanceof Towny)) {
+            log.info(String.format("[%s] Towny not found.", getDescription().getName()));
+        } else {
+            Guard.setTowny((Towny) towny);
         }
     }
 
