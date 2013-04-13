@@ -1,6 +1,6 @@
 name: WoolDyer
 main: haveric.woolDyer.WoolDyer
-version: 1.0.3
+version: 1.0.4
 author: haveric
 dev-url: http://dev.bukkit.org/server-mods/wooldyer/
 softdepend: [WorldGuard, Towny]
@@ -8,6 +8,7 @@ description: >
              Dye wool that is already placed
 commands:
     wooldyer:
+        aliases: [wd]
         description: Dye wool that is already placed
         usage:
 permissions:

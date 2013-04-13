@@ -10,7 +10,11 @@ public class Commands implements CommandExecutor {
     private WoolDyer plugin;
 
     private static String cmdMain = "wooldyer";
+    private static String cmdMainAlt = "wd";
     private static String cmdHelp = "help";
+
+    private static String cmdPerms = "perms";
+    private static String cmdPermsAlt = "perm";
 
     public Commands(WoolDyer wd) {
         plugin = wd;
@@ -19,13 +23,24 @@ public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         ChatColor msgColor = ChatColor.DARK_AQUA;
-        //ChatColor highlightColor = ChatColor.YELLOW;
 
         String title = msgColor + "[" + ChatColor.GRAY + plugin.getDescription().getName() + msgColor + "] ";
 
-        if (commandLabel.equalsIgnoreCase(cmdMain)) {
+        boolean op = false;
+        if (sender.isOp()) {
+            op = true;
+        }
+
+        if (commandLabel.equalsIgnoreCase(cmdMain) || commandLabel.equalsIgnoreCase(cmdMainAlt)) {
             if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(cmdHelp))) {
                 sender.sendMessage(title + "github.com/haveric/WoolDyer - v" + plugin.getDescription().getVersion());
+            } else if (args.length == 1 && (args[0].equalsIgnoreCase(cmdPerms) || args[0].equalsIgnoreCase(cmdPermsAlt))) {
+                if (op) {
+                    sender.sendMessage(title + "Permission nodes:");
+                    sender.sendMessage(Perms.getPermDye() + " - " + msgColor + "Allows user to dye wool");
+                } else {
+                    sender.sendMessage(title + ChatColor.RED + "You must be an op or to see permission nodes.");
+                }
             }
         }
         return false;

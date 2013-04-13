@@ -8,4 +8,8 @@ public class Perms {
     public static boolean canDye(Player player) {
         return player.hasPermission(permDye);
     }
+
+    public static String getPermDye() {
+        return permDye;
+    }
 }
