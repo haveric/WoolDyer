@@ -3,6 +3,9 @@
 
 ### Changelog:
 
+#### Version 1.0.5
+* Updated Metrics to R7
+
 #### Version 1.0.4 (4/13/2013)
 * Updated Metrics version
 * Added Towny support
