@@ -63,7 +63,7 @@ public class WoolDyer extends JavaPlugin {
     private void setupWorldGuard(PluginManager pm) {
         Plugin worldGuard = pm.getPlugin("WorldGuard");
         if (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) {
-            log.info(String.format("[%s] WorldGuard not found.", getDescription().getName()));
+            log.info("WorldGuard not found.");
         } else {
             Guard.setWorldGuard((WorldGuardPlugin) worldGuard);
         }
@@ -72,7 +72,7 @@ public class WoolDyer extends JavaPlugin {
     private void setupTowny(PluginManager pm) {
         Plugin towny = pm.getPlugin("Towny");
         if (towny ==  null || !(towny instanceof Towny)) {
-            log.info(String.format("[%s] Towny not found.", getDescription().getName()));
+            log.info("Towny not found.");
         } else {
             Guard.setTowny((Towny) towny);
         }
