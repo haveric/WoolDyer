@@ -6,6 +6,7 @@
 #### Version 1.0.5
 * Updated Metrics to R7
 * Removed extra "[WoolDyer]" being logged
+* Fixed perms message for non op players
 
 #### Version 1.0.4 (4/13/2013)
 * Updated Metrics version

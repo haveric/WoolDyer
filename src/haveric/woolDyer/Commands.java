@@ -39,7 +39,7 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage(title + "Permission nodes:");
                     sender.sendMessage(Perms.getPermDye() + " - " + msgColor + "Allows user to dye wool");
                 } else {
-                    sender.sendMessage(title + ChatColor.RED + "You must be an op or to see permission nodes.");
+                    sender.sendMessage(title + ChatColor.RED + "You must be an op to see permission nodes.");
                 }
             }
         }
