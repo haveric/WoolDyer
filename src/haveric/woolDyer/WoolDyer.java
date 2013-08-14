@@ -1,11 +1,15 @@
 package haveric.woolDyer;
 
+import haveric.woolDyer.blockLogger.BlockLogger;
 import haveric.woolDyer.guard.Guard;
 import haveric.woolDyer.mcstats.Metrics;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
+
+import net.coreprotect.CoreProtect;
+import net.coreprotect.CoreProtectAPI;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,6 +19,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.palmergames.bukkit.towny.Towny;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
+import de.diddiz.LogBlock.Consumer;
+import de.diddiz.LogBlock.LogBlock;
 
 public class WoolDyer extends JavaPlugin {
     private static Logger log;
@@ -49,6 +56,10 @@ public class WoolDyer extends JavaPlugin {
         setupWorldGuard(pm);
         // Towny
         setupTowny(pm);
+        // CoreProtect
+        setupCoreProtect(pm);
+        // LogBlock
+        setupLogBlock(pm);
 
         getCommand(commands.getMain()).setExecutor(commands);
 
@@ -75,6 +86,26 @@ public class WoolDyer extends JavaPlugin {
             log.info("Towny not found.");
         } else {
             Guard.setTowny((Towny) towny);
+        }
+    }
+
+    private void setupCoreProtect(PluginManager pm) {
+        Plugin coreProtect = pm.getPlugin("CoreProtect");
+        if (coreProtect == null || !(coreProtect instanceof CoreProtect)) {
+            // CoreProtect not found
+        } else {
+            CoreProtectAPI coreProtectAPI = ((CoreProtect) coreProtect).getAPI();
+            BlockLogger.setCoreProtectAPI(coreProtectAPI);
+        }
+    }
+
+    private void setupLogBlock(PluginManager pm) {
+        Plugin logBlock = pm.getPlugin("LogBlock");
+        if (logBlock == null || !(logBlock instanceof LogBlock)) {
+            // LogBlock not found
+        } else {
+            Consumer logBlockConsumer = ((LogBlock) logBlock).getConsumer();
+            BlockLogger.setLogBlockConsumer(logBlockConsumer);
         }
     }
 

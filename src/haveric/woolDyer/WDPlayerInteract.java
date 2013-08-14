@@ -1,10 +1,12 @@
 package haveric.woolDyer;
 
+import haveric.woolDyer.blockLogger.BlockLogger;
 import haveric.woolDyer.guard.Guard;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -50,6 +52,7 @@ public class WDPlayerInteract implements Listener {
               if (Perms.canDye(player)) {
 
                  Block block = event.getClickedBlock();
+                 BlockState oldState = block.getState();
                  if (Guard.canPlace(player, block.getLocation())) {
                      int wool = block.getData();
                      int dye = 15 - holding.getDurability();
@@ -134,6 +137,8 @@ public class WDPlayerInteract implements Listener {
                              }
                          }
                          block.setData((byte) newData);
+                         BlockState newState = block.getState();
+                         BlockLogger.logBlock(player.getName(), oldState, newState);
                      }
                   }
               }
