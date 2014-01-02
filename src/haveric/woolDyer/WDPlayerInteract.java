@@ -14,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class WDPlayerInteract implements Listener {
 
@@ -43,8 +42,6 @@ public class WDPlayerInteract implements Listener {
     @EventHandler (priority = EventPriority.LOW)
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-
-        PlayerInventory inventory = player.getInventory();
 
         ItemStack holding = player.getItemInHand();
          if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.WOOL && holding.getType() == Material.INK_SACK) {
@@ -128,14 +125,7 @@ public class WDPlayerInteract implements Listener {
                          }
                      }
                      if (wool != newData) {
-                         if (player.getGameMode() == GameMode.SURVIVAL) {
-                             int amt = holding.getAmount();
-                             if (amt > 1) {
-                                 holding.setAmount(--amt);
-                             } else {
-                                 inventory.setItemInHand(null);
-                             }
-                         }
+                         removeFromHand(player);
                          block.setData((byte) newData);
                          BlockState newState = block.getState();
                          BlockLogger.logBlock(player.getName(), oldState, newState);
@@ -143,5 +133,19 @@ public class WDPlayerInteract implements Listener {
                   }
               }
          }
+    }
+
+ // Remove one item from hand
+    private void removeFromHand(Player player) {
+        if (player.getGameMode() == GameMode.SURVIVAL) {
+            ItemStack holding = player.getItemInHand();
+
+            int amt = holding.getAmount();
+            if (amt > 1) {
+                holding.setAmount(--amt);
+            } else {
+                player.getInventory().setItemInHand(null);
+            }
+        }
     }
 }
