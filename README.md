@@ -3,9 +3,8 @@
 
 ### Changelog:
 
-#### Coming Soon:
+#### Version 1.0.6 (1/18/2014)
 * Support for all protection and block logging plugins.
-
 
 #### Version 1.0.5 (8/19/2013)
 * Updated Metrics to R7
