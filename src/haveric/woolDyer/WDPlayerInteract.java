@@ -1,8 +1,5 @@
 package haveric.woolDyer;
 
-import haveric.woolDyer.blockLogger.BlockLogger;
-import haveric.woolDyer.guard.Guard;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -47,95 +45,103 @@ public class WDPlayerInteract implements Listener {
          if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.WOOL && holding.getType() == Material.INK_SACK) {
 
               if (Perms.canDye(player)) {
+                  Block block = event.getClickedBlock();
 
-                 Block block = event.getClickedBlock();
-                 BlockState oldState = block.getState();
-                 if (Guard.canPlace(player, block.getLocation())) {
-                     int wool = block.getData();
-                     int dye = 15 - holding.getDurability();
+                  int wool = block.getData();
+                  int dye = 15 - holding.getDurability();
 
-                     int newData = wool;
-                     if (plugin.canReplaceAll()) {
-                         newData = dye;
-                     } else {
-                         if (wool == WHITE && dye != WHITE) {
-                             newData = dye;
-                         } else if (wool == ORANGE) {
-                             if (dye == WHITE) {
-                                 newData = YELLOW;
-                             }
-                         } else if (wool == MAGENTA) {
-                             if (dye == WHITE) {
-                                 newData = PINK;
-                             }
-                         //} else if (wool == LIGHT_BLUE) {
+                  int newData = wool;
+                  if (plugin.canReplaceAll()) {
+                      newData = dye;
+                  } else {
+                      if (wool == WHITE && dye != WHITE) {
+                          newData = dye;
+                      } else if (wool == ORANGE) {
+                          if (dye == WHITE) {
+                              newData = YELLOW;
+                          }
+                      } else if (wool == MAGENTA) {
+                          if (dye == WHITE) {
+                              newData = PINK;
+                          }
+                      //} else if (wool == LIGHT_BLUE) {
 
-                         } else if (wool == YELLOW) {
-                             if (dye == RED) {
-                                 newData = ORANGE;
-                             }
-                         //} else if (wool == LIGHT_GREEN) {
+                      } else if (wool == YELLOW) {
+                          if (dye == RED) {
+                              newData = ORANGE;
+                          }
+                      //} else if (wool == LIGHT_GREEN) {
 
-                         } else if (wool == PINK) {
-                             if (dye == PURPLE) {
-                                 newData = MAGENTA;
-                             }
-                         } else if (wool == GRAY) {
-                             if (dye == WHITE || dye == LIGHT_GRAY) {
-                                 newData = LIGHT_GRAY;
-                             } else if (dye == BLACK) {
-                                 newData = BLACK;
-                             }
-                         } else if (wool == LIGHT_GRAY) {
-                             if (dye == WHITE) {
-                                 newData = WHITE;
-                             } else if (dye == BLACK) {
-                                 newData = GRAY;
-                             }
-                         //} else if (wool == CYAN) {
+                      } else if (wool == PINK) {
+                          if (dye == PURPLE) {
+                              newData = MAGENTA;
+                          }
+                      } else if (wool == GRAY) {
+                          if (dye == WHITE || dye == LIGHT_GRAY) {
+                              newData = LIGHT_GRAY;
+                          } else if (dye == BLACK) {
+                              newData = BLACK;
+                          }
+                      } else if (wool == LIGHT_GRAY) {
+                          if (dye == WHITE) {
+                              newData = WHITE;
+                          } else if (dye == BLACK) {
+                              newData = GRAY;
+                          }
+                      //} else if (wool == CYAN) {
 
-                         } else if (wool == PURPLE) {
-                             if (dye == PINK || dye == WHITE) {
-                                 newData = MAGENTA;
-                             }
-                         } else if (wool == BLUE) {
-                             if (dye == WHITE) {
-                                 newData = LIGHT_BLUE;
-                             } else if (dye == GREEN) {
-                                 newData = CYAN;
-                             }
-                         //} else if (wool == BROWN) {
+                      } else if (wool == PURPLE) {
+                          if (dye == PINK || dye == WHITE) {
+                              newData = MAGENTA;
+                          }
+                      } else if (wool == BLUE) {
+                          if (dye == WHITE) {
+                              newData = LIGHT_BLUE;
+                          } else if (dye == GREEN) {
+                              newData = CYAN;
+                          }
+                      //} else if (wool == BROWN) {
 
-                         } else if (wool == GREEN) {
-                             if (dye == WHITE) {
-                                 newData = LIGHT_GREEN;
-                             }
-                         } else if (wool == RED) {
-                             if (dye == YELLOW || dye == WHITE) {
-                                 newData = ORANGE;
-                             } else if (dye == BLUE) {
-                                 newData = PURPLE;
-                             } else if (dye == WHITE) {
-                                 newData = PINK;
-                             }
-                         } else if (wool == BLACK) {
-                             if (dye == WHITE || dye == GRAY || dye == LIGHT_GRAY) {
-                                 newData = GRAY;
-                             }
-                         }
-                     }
-                     if (wool != newData) {
-                         removeFromHand(player);
-                         block.setData((byte) newData);
-                         BlockState newState = block.getState();
-                         BlockLogger.logBlock(player.getName(), oldState, newState);
-                     }
+                      } else if (wool == GREEN) {
+                          if (dye == WHITE) {
+                              newData = LIGHT_GREEN;
+                          }
+                      } else if (wool == RED) {
+                          if (dye == YELLOW || dye == WHITE) {
+                              newData = ORANGE;
+                          } else if (dye == BLUE) {
+                              newData = PURPLE;
+                          } else if (dye == WHITE) {
+                              newData = PINK;
+                          }
+                      } else if (wool == BLACK) {
+                          if (dye == WHITE || dye == GRAY || dye == LIGHT_GRAY) {
+                              newData = GRAY;
+                          }
+                      }
+                  }
+                  if (wool != newData) {
+                      replaceBlock(player, block, newData);
                   }
               }
          }
     }
 
- // Remove one item from hand
+    private void replaceBlock(Player player, Block block, int data) {
+        BlockState state = block.getState();
+        block.setData((byte) data);
+
+        BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getItemInHand(), player, true);
+        plugin.getServer().getPluginManager().callEvent(placeEvent);
+
+        if (placeEvent.isCancelled()) {
+            state.update(true);
+        } else {
+            removeFromHand(player);
+        }
+    }
+
+    // Remove one item from hand
     private void removeFromHand(Player player) {
         if (player.getGameMode() == GameMode.SURVIVAL) {
             ItemStack holding = player.getItemInHand();
