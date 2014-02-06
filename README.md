@@ -3,6 +3,9 @@
 
 ### Changelog:
 
+#### Coming Soon
+* Remove items from all non-creative GameModes and not just survival
+
 #### Version 1.0.6 (1/18/2014)
 * Support for all protection and block logging plugins.
 
