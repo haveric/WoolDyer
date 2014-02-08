@@ -32,7 +32,7 @@ public class WoolDyer extends JavaPlugin {
         pm.registerEvents(new WDPlayerInteract(this), this);
 
         // create a new config file
-        configFile = new File(getDataFolder() + "/config.yml");
+        configFile = new File(getDataFolder() + File.separator + "config.yml");
 
         if (!configFile.exists()) {
             setupConfig();
