@@ -4,6 +4,7 @@
 ### Changelog:
 
 #### Coming Soon
+* Updated Metrics to work with updated getOnlinePlayers
 * Remove items from all non-creative GameModes and not just survival
 
 #### Version 1.0.6 (1/18/2014)
