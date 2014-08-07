@@ -12,7 +12,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WoolDyer extends JavaPlugin {
-    static Logger log;
+    Logger log;
 
     private Commands commands = new Commands(this);
 
