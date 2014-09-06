@@ -3,6 +3,9 @@
 
 ### Changelog:
 
+#### Coming Soon:
+* Updated Metrics to handle old getOnlinePlayers (provides backward support for old versions of CraftBukkit)
+
 #### Version 1.0.7 (8/12/2014)
 * Updated Metrics to work with updated getOnlinePlayers
 * Remove items from all non-creative GameModes and not just survival
