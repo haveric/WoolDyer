@@ -2,6 +2,7 @@ name: WoolDyer
 main: haveric.woolDyer.WoolDyer
 version: 1.0.7
 author: haveric
+website: http://dev.bukkit.org/server-mods/wooldyer/
 dev-url: http://dev.bukkit.org/server-mods/wooldyer/
 description: >
              Dye wool that is already placed
