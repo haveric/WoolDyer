@@ -20,7 +20,7 @@ public class WoolDyer extends JavaPlugin {
     private FileConfiguration config;
     private File configFile;
 
-    private final static boolean REPLACE_ALL_DEFAULT = true;
+    private static final boolean REPLACE_ALL_DEFAULT = true;
 
     private Metrics metrics;
 
