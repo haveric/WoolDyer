@@ -22,6 +22,7 @@ public class WoolDyer {
     private Game game;
     @SuppressWarnings("unused")
     private Commands commands;
+    private Config config;
 
     @Subscribe
     public void preStartup(ServerAboutToStartEvent event) {
@@ -41,6 +42,7 @@ public class WoolDyer {
         em.register(this, new WDPlayerInteract(this));
 
         commands = new Commands(this);
+        config = new Config(this);
     }
 
     @Subscribe
