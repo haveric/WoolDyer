@@ -34,7 +34,7 @@ public class WDPlayerInteract {
                 if (optionalHolding.isPresent()) {
                     ItemStack holding = optionalHolding.get();
 
-                    if (holding.getItem() == ItemTypes.DYE) {
+                    if (holding.getItem() == ItemTypes.DYE && Perms.canDye(player)) {
                         int dye = 15 - holding.getDamage();
                         String dyeColor = colors.values()[dye].toString();
 
