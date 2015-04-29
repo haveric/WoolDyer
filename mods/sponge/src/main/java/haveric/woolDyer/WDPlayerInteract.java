@@ -1,17 +1,11 @@
 package haveric.woolDyer;
 
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.block.BlockProperty;
 import org.spongepowered.api.block.BlockState;
-import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.entity.EntityInteractionType;
 import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.event.entity.living.player.PlayerInteractBlockEvent;
-import org.spongepowered.api.item.ItemTypes;
+import org.spongepowered.api.event.Subscribe;
+import org.spongepowered.api.event.entity.player.PlayerInteractBlockEvent;
 import org.spongepowered.api.item.inventory.ItemStack;
-import org.spongepowered.api.util.event.Subscribe;
-
-import com.google.common.base.Optional;
+import org.spongepowered.api.world.Location;
 
 public class WDPlayerInteract {
 
@@ -40,8 +34,9 @@ public class WDPlayerInteract {
 
     @Subscribe
     public void onPlayerInteract(PlayerInteractBlockEvent event) {
-        if (event.getInteractionType() == EntityInteractionType.RIGHT_CLICK) {
-            BlockLoc block = event.getBlock();
+        /*
+        if (event.getInteractionType() == EntityInteractionTypes.USE) {
+            Location block = event.getBlock();
 
             if (block.getType() == BlockTypes.WOOL) {
                 Player player = event.getPlayer();
@@ -53,7 +48,7 @@ public class WDPlayerInteract {
                     if (holding.getItem() == ItemTypes.DYE && Perms.canDye(player)) {
                         int dye = 15 - holding.getDamage();
                         String dyeColor = colors.values()[dye].toString();
-
+                        block.getState().getManipulators().asList()
                         Optional<? extends Comparable<?>> opBlockColor = block.getState().getPropertyValue("color");
                         if (opBlockColor.isPresent()) {
                             String blockColor = opBlockColor.get().toString();
@@ -138,9 +133,10 @@ public class WDPlayerInteract {
                 }
             }
         }
+        */
     }
 
-    private void replaceBlock(Player player, BlockLoc block, BlockState newBlock, ItemStack holding) {
+    private void replaceBlock(Player player, Location block, BlockState newBlock, ItemStack holding) {
 
         // TODO: Call a place event and check for cancellation
         block.replaceWith(newBlock);

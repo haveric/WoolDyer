@@ -3,6 +3,7 @@ package haveric.woolDyer;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStartingEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
@@ -10,7 +11,6 @@ import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.plugin.PluginManager;
 import org.spongepowered.api.service.event.EventManager;
-import org.spongepowered.api.util.event.Subscribe;
 
 import com.google.common.base.Optional;
 
@@ -26,6 +26,7 @@ public class WoolDyer {
 
     @Subscribe
     public void preStartup(ServerAboutToStartEvent event) {
+        log.info("Pre startup");
         game = event.getGame();
         PluginManager pm = game.getPluginManager();
 
@@ -38,6 +39,7 @@ public class WoolDyer {
 
     @Subscribe
     public void onStartup(ServerStartingEvent event) {
+        log.info("Starting");
         EventManager em = game.getEventManager();
         em.register(this, new WDPlayerInteract(this));
 
@@ -47,7 +49,7 @@ public class WoolDyer {
 
     @Subscribe
     public void onShutdown(ServerStoppingEvent event) {
-
+        log.info("Shutdown");
     }
 
     public Game getGame() {
