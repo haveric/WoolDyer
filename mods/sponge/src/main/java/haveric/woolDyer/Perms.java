@@ -1,6 +1,6 @@
 package haveric.woolDyer;
 
-import org.spongepowered.api.entity.player.Player;
+import org.spongepowered.api.entity.living.player.Player;
 
 public class Perms {
     private static final String permDye = "wooldyer.dye";

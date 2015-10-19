@@ -2,6 +2,7 @@ package haveric.woolDyer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
@@ -11,8 +12,6 @@ import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
 import org.spongepowered.api.util.command.CommandResult;
 import org.spongepowered.api.util.command.CommandSource;
-
-import com.google.common.base.Optional;
 
 public class Commands {
 
@@ -40,9 +39,9 @@ public class Commands {
             }
 
             @Override
-            public Optional<CommandResult> process(CommandSource source, String args) throws CommandException {
+            public CommandResult process(CommandSource source, String args) throws CommandException {
                 source.sendMessage(Texts.of(msgColor, "github.com/haveric/WoolDyer - v" + plugin.getVersion()));
-                return Optional.of(CommandResult.success());
+                return CommandResult.success();
             }
             /*
             @Override
@@ -63,11 +62,11 @@ public class Commands {
 
             @Override
             public Optional<Text> getHelp(CommandSource arg0) {
-                return Optional.absent();
+                return Optional.empty();
             }
             @Override
             public Optional<Text> getShortDescription(CommandSource arg0) {
-                return Optional.absent();
+                return Optional.empty();
             }
             @Override
             public Text getUsage(CommandSource arg0) {
