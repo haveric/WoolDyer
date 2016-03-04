@@ -2,12 +2,12 @@ package haveric.woolDyer;
 
 import java.io.File;
 
-import ninja.leaping.configurate.ConfigurationNode;
-import ninja.leaping.configurate.loader.ConfigurationLoader;
-
-import org.spongepowered.api.service.config.DefaultConfig;
+import org.spongepowered.api.config.DefaultConfig;
 
 import com.google.inject.Inject;
+
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class Config {
 

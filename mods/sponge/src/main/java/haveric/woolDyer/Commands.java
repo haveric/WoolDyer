@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.util.command.CommandCallable;
-import org.spongepowered.api.util.command.CommandException;
-import org.spongepowered.api.util.command.CommandResult;
-import org.spongepowered.api.util.command.CommandSource;
+
 
 public class Commands {
 
@@ -40,7 +41,7 @@ public class Commands {
 
             @Override
             public CommandResult process(CommandSource source, String args) throws CommandException {
-                source.sendMessage(Texts.of(msgColor, "github.com/haveric/WoolDyer - v" + plugin.getVersion()));
+                source.sendMessage(Text.of(msgColor, "github.com/haveric/WoolDyer - v" + plugin.getVersion()));
                 return CommandResult.success();
             }
             /*
@@ -70,7 +71,7 @@ public class Commands {
             }
             @Override
             public Text getUsage(CommandSource arg0) {
-                return Texts.of("");
+                return Text.of("");
             }
         };
 
@@ -78,6 +79,6 @@ public class Commands {
         aliases.add("wooldyer");
         aliases.add("wd");
 
-        plugin.getGame().getCommandDispatcher().register(plugin, callable, aliases);
+        Sponge.getCommandManager().register(plugin, callable, aliases);
     }
 }
