@@ -1,7 +1,5 @@
 package haveric.woolDyer;
 
-import haveric.woolDyer.mcstats.Metrics;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -22,8 +20,6 @@ public class WoolDyer extends JavaPlugin {
 
     private static final boolean REPLACE_ALL_DEFAULT = true;
 
-    private Metrics metrics;
-
     @Override
     public void onEnable() {
         log = getLogger();
@@ -41,8 +37,6 @@ public class WoolDyer extends JavaPlugin {
         }
 
         getCommand(commands.getMain()).setExecutor(commands);
-
-        setupMetrics();
     }
 
     @Override
@@ -62,15 +56,5 @@ public class WoolDyer extends JavaPlugin {
 
     public boolean canReplaceAll() {
         return config.getBoolean("replaceAll");
-    }
-
-    private void setupMetrics() {
-        try {
-            metrics = new Metrics(this);
-
-            metrics.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
