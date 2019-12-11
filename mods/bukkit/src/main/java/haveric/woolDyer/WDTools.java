@@ -84,7 +84,6 @@ public class WDTools {
             case RED_DYE:
                 return Material.RED_WOOL;
             case BLACK_DYE:
-                return Material.BLACK_WOOL;
             default:
                 return Material.BLACK_WOOL;
         }
