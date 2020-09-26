@@ -1,5 +1,8 @@
 == Changelog ==
 
+=== Version 1.1.1 ===
+* Add support for player hand swinging when dying blocks
+
 === Version 1.1.0 (4/25/2019)
 * 1.14 Support
 * Removed Metrics
