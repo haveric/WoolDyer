@@ -24,6 +24,8 @@ public class WoolDyer extends JavaPlugin {
     public void onEnable() {
         log = getLogger();
 
+        Supports.init();
+
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new WDPlayerInteract(this), this);
 

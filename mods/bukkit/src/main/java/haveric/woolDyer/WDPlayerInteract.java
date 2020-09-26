@@ -29,7 +29,6 @@ public class WDPlayerInteract implements Listener {
         Block block = event.getClickedBlock();
         Material dye = holding.getType();
          if (event.getHand() == EquipmentSlot.HAND && event.getAction() == Action.RIGHT_CLICK_BLOCK && block != null && WDTools.isWool(block.getType()) && WDTools.isDye(dye)) {
-
               if (Perms.canDye(player)) {
                   Material wool = block.getType();
 
@@ -122,6 +121,10 @@ public class WDPlayerInteract implements Listener {
             state.update(true);
         } else {
             removeFromHand(player);
+
+            if (Supports.swingHand()) {
+                player.swingMainHand();
+            }
         }
     }
 
