@@ -41,11 +41,6 @@ public class WoolDyer extends JavaPlugin {
         getCommand(commands.getMain()).setExecutor(commands);
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
     private void setupConfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
         config.set("replaceAll", REPLACE_ALL_DEFAULT);
