@@ -1,11 +1,3 @@
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
-jar {
-    archivesBaseName = 'WoolDyer'
-}
-
 repositories {
     mavenCentral()
     maven {
@@ -15,5 +7,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT"
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
 }
+
+task copyJar(type: Copy) {
+    from jar
+    into '../build/libs/bukkit/'
+}
+
+build.dependsOn copyJar
