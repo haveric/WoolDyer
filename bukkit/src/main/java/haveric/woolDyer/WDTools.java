@@ -52,40 +52,23 @@ public class WDTools {
     }
 
     public static Material getWoolFromDye(Material dye) {
-        switch(dye) {
-            case WHITE_DYE:
-                return Material.WHITE_WOOL;
-            case ORANGE_DYE:
-                return Material.ORANGE_WOOL;
-            case MAGENTA_DYE:
-                return Material.MAGENTA_WOOL;
-            case LIGHT_BLUE_DYE:
-                return Material.LIGHT_BLUE_WOOL;
-            case YELLOW_DYE:
-                return Material.YELLOW_WOOL;
-            case LIME_DYE:
-                return Material.LIME_WOOL;
-            case PINK_DYE:
-                return Material.PINK_WOOL;
-            case GRAY_DYE:
-                return Material.GRAY_WOOL;
-            case LIGHT_GRAY_DYE:
-                return Material.LIGHT_GRAY_WOOL;
-            case CYAN_DYE:
-                return Material.CYAN_WOOL;
-            case PURPLE_DYE:
-                return Material.PURPLE_WOOL;
-            case BLUE_DYE:
-                return Material.BLUE_WOOL;
-            case BROWN_DYE:
-                return Material.BROWN_WOOL;
-            case GREEN_DYE:
-                return Material.GREEN_WOOL;
-            case RED_DYE:
-                return Material.RED_WOOL;
-            case BLACK_DYE:
-            default:
-                return Material.BLACK_WOOL;
-        }
+        return switch (dye) {
+            case WHITE_DYE -> Material.WHITE_WOOL;
+            case ORANGE_DYE -> Material.ORANGE_WOOL;
+            case MAGENTA_DYE -> Material.MAGENTA_WOOL;
+            case LIGHT_BLUE_DYE -> Material.LIGHT_BLUE_WOOL;
+            case YELLOW_DYE -> Material.YELLOW_WOOL;
+            case LIME_DYE -> Material.LIME_WOOL;
+            case PINK_DYE -> Material.PINK_WOOL;
+            case GRAY_DYE -> Material.GRAY_WOOL;
+            case LIGHT_GRAY_DYE -> Material.LIGHT_GRAY_WOOL;
+            case CYAN_DYE -> Material.CYAN_WOOL;
+            case PURPLE_DYE -> Material.PURPLE_WOOL;
+            case BLUE_DYE -> Material.BLUE_WOOL;
+            case BROWN_DYE -> Material.BROWN_WOOL;
+            case GREEN_DYE -> Material.GREEN_WOOL;
+            case RED_DYE -> Material.RED_WOOL;
+            default -> Material.BLACK_WOOL;
+        };
     }
 }
